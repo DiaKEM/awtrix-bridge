@@ -1,4 +1,3 @@
-
 export const Tendency = {
   flat: 'flat',
   up: 'up',
@@ -7,21 +6,21 @@ export const Tendency = {
   doubleDown: 'doubleDown',
   fortyfiveDown: 'fortyfiveDown',
   fortyfiveUp: 'fortyfiveUp',
-  unknown: 'unknown'
+  unknown: 'unknown',
 } as const;
 
 export type TendencyKeys = keyof typeof Tendency;
-export type TendencyType = typeof Tendency[TendencyKeys];
+export type TendencyType = (typeof Tendency)[TendencyKeys];
 export type BloodSugarData = {
   value: number;
   timestamp: number;
-  tendency: TendencyType
-}
+  tendency: TendencyType;
+};
 
 export type Response = {
-  latest: BloodSugarData,
-  previous: BloodSugarData
-}
+  latest: BloodSugarData;
+  previous: BloodSugarData;
+};
 
 export interface ConnectorInterface {
   login(): boolean;

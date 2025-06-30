@@ -12,7 +12,7 @@ export class BGConnector implements ConnectorInterface {
     private readonly nightScoutToken?: string,
     private readonly dexcomUsername?: string,
     private readonly dexcomPassword?: string,
-    private readonly dexcomServer?: 'EU'|'US',
+    private readonly dexcomServer?: 'EU' | 'US',
     // @ts-expect-error will be used somewhen
     private readonly libreUsername?: string,
     // @ts-expect-error will be used somewhen
@@ -22,15 +22,26 @@ export class BGConnector implements ConnectorInterface {
       if (!isString(this.nightScoutToken) || !isString(this.nightScoutUrl)) {
         throw new Error('Please define nightscout url and token.');
       }
-      this.client = new NightscoutConnector(this.nightScoutUrl, this.nightScoutToken);
+      this.client = new NightscoutConnector(
+        this.nightScoutUrl,
+        this.nightScoutToken,
+      );
       return;
     }
 
     if (this.type === 'dexcom') {
-      if (!isString(this.dexcomUsername) || !isString(this.dexcomPassword) || !isString(this.dexcomServer)) {
+      if (
+        !isString(this.dexcomUsername) ||
+        !isString(this.dexcomPassword) ||
+        !isString(this.dexcomServer)
+      ) {
         throw new Error('Please define dexcom credentials and server.');
       }
-      this.client = new DexcomConnector(this.dexcomUsername, this.dexcomPassword, this.dexcomServer);
+      this.client = new DexcomConnector(
+        this.dexcomUsername,
+        this.dexcomPassword,
+        this.dexcomServer,
+      );
       return;
     }
 
@@ -38,7 +49,9 @@ export class BGConnector implements ConnectorInterface {
       // @todo
     }
 
-    throw new Error('Unable to build connector for given data. Check your .env variables and try again!')
+    throw new Error(
+      'Unable to build connector for given data. Check your .env variables and try again!',
+    );
   }
 
   async getLatestValues(): Promise<Response> {

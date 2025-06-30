@@ -5,7 +5,7 @@ const { read } = DexcomApiClient({
   username: 'username',
   password: 'password',
   server: 'EU',
-  debug: false
+  debug: false,
 });
 
 // Retrieve data from the sharing service
